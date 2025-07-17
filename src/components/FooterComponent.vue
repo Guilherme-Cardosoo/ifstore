@@ -27,7 +27,7 @@
       </div>
     </section>
     <section class="lower-footer">
-      <p>&copy; Alguns direitos reservados. IFstore. 2025</p>
+      <p>&copy; Alguns direitos reservados. ByteStore. 2025</p>
     </section>
   </nav>
 </footer>
