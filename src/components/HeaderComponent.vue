@@ -14,40 +14,47 @@ function toggleMenu() {
 <template>
   <header>
     <nav>
-      <h1>
-        <RouterLink to="/">IFstore
-          <span class="logo-title"> Apreço a computadores </span>
-        </RouterLink>
-      </h1>
-      <!-- <div class="search-wrapper">
-        <input type="text" class="search" placeholder="Buscar..." />
-      </div> -->
+      <div class="nav-left">
+        <h1>
+          <RouterLink to="/">
+            ByteStore
+          </RouterLink>
+        </h1>
+      </div>
+
+      <div class="nav-center">
+        <div class="search-wrapper">
+          <input type="text" placeholder="Buscar produtos" />
+        </div>
+      </div>
+
+      <div class="nav-right">
+        <ul class="icons">
+          <li>
+            <RouterLink to="/cart"><span class="mdi mdi-cart"></span></RouterLink>
+          </li>
+          <li>
+            <span id="darkModeButton" @click="toggleDarkMode" aria-label="Alternar modo escuro">
+              <i :class="isDarkMode ? 'fa-solid fa-moon' : 'fa-solid fa-sun'"></i>
+            </span>
+          </li>
+          <li>
+            <button class="hamburger" @click="toggleMenu">
+              <span class="mdi mdi-menu"></span>
+            </button>
+          </li>
+        </ul>
+      </div>
+
       <ul :class="{ 'nav-links': true, 'active': isMenuOpen }">
+        <li class="close-button" @click="toggleMenu">
+          <span class="mdi mdi-chevron-right"></span>
+        </li>
         <li><RouterLink to="/pcbuild" @click="toggleMenu">Monte seu PC</RouterLink></li>
         <li><RouterLink to="/products/processadores" @click="toggleMenu">Processadores</RouterLink></li>
         <li><RouterLink to="/products/monitores" @click="toggleMenu">Monitores</RouterLink></li>
         <li><RouterLink to="/products/perifericos" @click="toggleMenu">Periféricos</RouterLink></li>
       </ul>
-      <ul class="icons">
-        <li>
-          <RouterLink to="/cart"><span class="mdi mdi-cart"></span></RouterLink>
-        </li>
-        <li>
-            <span
-              id="darkModeButton"
-              @click="toggleDarkMode"
-              aria-label="Alternar modo escuro"
-            >
-            <i :class="isDarkMode ? 'fa-solid fa-moon' : 'fa-solid fa-sun'"></i>
-        </span>
-        </li>
-
-            <button class="hamburger" @click="toggleMenu">
-              <span class="mdi mdi-menu"></span>
-            </button>
-
-      </ul>
-      
     </nav>
   </header>
 </template>
@@ -57,22 +64,44 @@ function toggleMenu() {
   border: none;
   background-color: var(--page2);
   color: var(--text);
-
   cursor: pointer;
   font-size: 1rem;
   transition: transform 0.2s ease, background-color 0.3s, color 0.3s;
 }
+
 header nav {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
   padding: 5vh 5vw;
-  border-bottom: 2px solid #27ae6099;
   z-index: 999;
+  gap: 10px;
+}
+
+.nav-left,
+.nav-center,
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.nav-left {
+  flex: 1;
+}
+
+.nav-center {
+  flex: 2;
+  justify-content: center;
+}
+
+.nav-right {
+  flex: 1;
+  justify-content: flex-end;
 }
 
 header nav h1 {
-  font-size: clamp(1.1rem, 3vw, 1.3rem);
+  font-size: clamp(2.3rem, 3vw, 1.3rem);
   color: #000;
 }
 
@@ -80,50 +109,19 @@ header nav h1 a {
   text-decoration: none;
   display: flex;
   align-items: center;
-}
-
-header nav h1 .logo-title {
-  border-left: 1px solid #27ae6099;
-  font-size: clamp(0.7rem, 2vw, 0.8rem);
-  margin-left: 10px;
-  padding-left: 10px;
-  color: #27ae6099;
-  width: auto;
-  line-height: 1rem;
+  color: #0276fa99;
+  font-weight: bold;
 }
 
 header nav input {
   width: 100%;
-  max-width: 400px;
-  height: 40px;
-  border-radius: 5px;
+  max-width: 360px;
+  height: 30px;
+  border-radius: 10px;
   font-size: clamp(0.9rem, 2.5vw, 1rem); 
-  border: 0;
-  background-color: #f1f1f1;
+  border: none;
+  background-color: var(--page3);
   padding: 5px 2rem 5px 1rem;
-}
-
-header nav ul.nav-links {
-  display: flex;
-  gap: 3rem;
-}
-
-header nav ul li {
-  list-style: none;
-  font-size: clamp(0.9rem, 2.5vw, 1rem);
-}
-
-header nav .icons {
-  display: flex;
-  gap: 10px;
-}
-
-header nav .icons li {
-  color: #27ae60;
-  font-size: clamp(1.1rem, 3vw, 1.3rem); 
-  background-color: var(--page2);
-  border-radius: 5px;
-  padding: 6px;
 }
 
 header nav .search-wrapper {
@@ -143,69 +141,108 @@ header nav .search-wrapper::before {
   pointer-events: none;
 }
 
-header nav .hamburger {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  color: #27ae60;
-  cursor: pointer;
+header nav .icons {
+  display: flex;
+  gap: 10px;
 }
 
-/* Media Queries para Design Responsivo */
+header nav .icons li {
+  font-size: clamp(1.1rem, 3vw, 1.3rem); 
+  background-color: var(--page2);
+  border-radius: 5px;
+  padding: 6px;
+}
+
+header nav .hamburger {
+  background-color: var(--page2);
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text);
+  cursor: pointer;
+  display: block;
+}
+
+header nav ul.nav-links {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 250px;
+  flex-direction: column;
+  background-color: var(--page1);
+  padding: 20px;
+  border-left: 1px solid #0276fa99;
+  z-index: 1000;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+}
+
+header nav ul.nav-links.active {
+  transform: translateX(0);
+}
+
+:root.dark header nav ul.nav-links {
+  background-color: #1e1e1e;
+  color: #f1f1f1;
+}
+
+header nav ul.nav-links li {
+  margin: 10px 0;
+  list-style: none;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+}
+
+header nav .nav-links .close-button {
+  align-self: flex-end;
+  background-color: var(--page2);
+  color: var(--text);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: background-color 0.3s;
+}
+
+header nav .nav-links .close-button:hover {
+  background-color: var(--page3);
+}
+
 @media (max-width: 768px) {
-  header nav {
-    flex-wrap: wrap;
-    position: relative;
+  .nav-left,
+  .nav-center,
+  .nav-right {
+    width: 100%;
+    justify-content: center;
   }
 
-  header nav .search-wrapper {
+  .nav-right {
+    justify-content: flex-end;
+  }
+
+  .nav-center {
     order: 2;
-    width: 100%;
-    max-width: none;
     margin: 10px 0;
-  }
-
-  header nav ul.nav-links {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    background-color: var(--page2);
-    position: absolute;
-    top: 100%;
-    left: 0;
-    padding: 10px 5vw;
-    border-top: 1px solid #27ae6099;
-  }
-
-  header nav ul.nav-links.active {
-    display: flex;
-  }
-
-  header nav ul.nav-links li {
-    margin: 10px 0;
-  }
-
-  header nav .hamburger {
-    display: block;
-  }
-
-  header nav .icons {
-    order: 1;
   }
 }
 
 @media (max-width: 480px) {
-  header nav .search-wrapper {
-    display: none; /* Esconde a barra de pesquisa em telas muito pequenas */
+  .nav-center {
+    display: none;
   }
 
   header nav h1 {
-    flex: 1; /* Logo ocupa espaço disponível */
+    flex: 1;
   }
 
   header nav .icons li {
-    font-size: 1.1rem; /* Reduz tamanho dos ícones */
+    font-size: 1.1rem;
   }
 }
 </style>

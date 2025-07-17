@@ -6,7 +6,6 @@ import { useProductStore } from '../stores/produtos'
 
 const productStore = useProductStore()
 
-// Carrossel de banners
 const bannerImages = ref([
   { src: '/images/banner1.jpg', alt: 'Banner 1', link: '/products/GPUs' },
   { src: '/images/banner2.jpg', alt: 'Banner 2', link: '/products/Notebooks' },
@@ -15,9 +14,7 @@ const bannerImages = ref([
 
 const { currentIndex: bannerIndex, track: bannerTrack, prevBtn: bannerPrevBtn, nextBtn: bannerNextBtn, productImages: bannerProductImages, goToSlide: bannerGoToSlide } = useCarousel(bannerImages)
 
-// Carrossel de promoções
 const promoImages = computed(() => {
-  // Embaralhar produtos e selecionar até 5 itens aleatórios
   const shuffledProducts = [...productStore.products].sort(() => Math.random() - 0.5)
   return shuffledProducts.slice(0, 5).map(product => ({
     src: product.image[0],
@@ -257,7 +254,7 @@ const { currentIndex: promoIndex, track: promoTrack, prevBtn: promoPrevBtn, next
 }
 
 .dot.active {
-  background: var(--text-hover);
+  background: #0276fa99;
 }
 
 #home-page-produtos, #center-produtos {
@@ -293,7 +290,7 @@ const { currentIndex: promoIndex, track: promoTrack, prevBtn: promoPrevBtn, next
 }
 
 #home-page-produtos div:hover, #center-produtos div:hover {
-  background: radial-gradient(circle, var(--text-hover) 10px, var(--page2-hover));
+  background: radial-gradient(circle, #0276fa99 10px, #074d9c99);
   & p {
     color: #fff;
   }

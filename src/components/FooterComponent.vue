@@ -8,7 +8,7 @@
     <section class="upper-footer">
       <div>
         <p class="footer-title">
-          <a href="#"> IFstore </a>
+          <a href="#"> ByteStore </a>
         </p>
         <ul>
           <li><span class="mdi mdi-facebook" /></li>

@@ -30,7 +30,6 @@ const { isDarkMode } = useDarkMode()
   opacity: 0;
 }
 
-/* Estilos para o tema escuro */
 :where(.dark) {
 }
 </style>

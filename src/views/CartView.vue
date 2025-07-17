@@ -68,14 +68,14 @@ const cartStore = useCartStore()
   align-items: flex-start;
   justify-content: center;
   padding: 5vh 8vw;
-  border-bottom: 2px solid #27ae6099;
+  border-bottom: 2px solid #0276fa99;
   background-color: var(--page2);
   border-radius: 5px;
 
   & h2 {
     font-size: 2rem;
     font-weight: 700;
-    color: #27ae60;
+    color: #0276fa99;
   }
 
   & table {
@@ -90,7 +90,7 @@ const cartStore = useCartStore()
     }
 
     & th {
-      border-bottom: 2px solid #27ae6099;
+      border-bottom: 2px solid #0276fa99;
       font-size: 1.2rem;
       font-weight: 700;
     }
@@ -172,7 +172,7 @@ const cartStore = useCartStore()
       & h2 {
         font-size: 1.2rem;
         font-weight: 700;
-        color: black;
+        color: #0276fa99;
       }
 
       & .summary-items {

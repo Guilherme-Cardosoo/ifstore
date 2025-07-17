@@ -4,7 +4,6 @@ import { useProductStore } from '../stores/produtos'
 import { useCartStore } from '@/stores/cart'
 import { ref } from 'vue'
 
-// Declara a prop category
 defineProps(['category'])
 
 const route = useRoute()
@@ -12,7 +11,6 @@ const router = useRouter()
 const Produtos = useProductStore()
 const cart = useCartStore()
 
-// Lista de categorias válidas
 const validCategories = [
   'Monitores',
   'Periféricos',
@@ -23,7 +21,6 @@ const validCategories = [
   'SSDs'
 ]
 
-// Normaliza a categoria para corresponder ao formato em products.js
 const normalizeCategory = (category) => {
   const categoryMap = {
     'monitores': 'Monitores',
@@ -33,24 +30,20 @@ const normalizeCategory = (category) => {
     'placas-mae': 'Placas-mãe',
     'placas-video': 'GPUs',
     'ssds': 'SSDs',
-    'gpus': 'GPUs' // Mapeia "GPU" para "Placas de Vídeo"
+    'gpus': 'GPUs' 
   }
   const normalized = categoryMap[category.toLowerCase()] || 'Monitores'
   return normalized
 }
 
-// Inicializa a categoria normalizada
 const normalizedCategory = ref(normalizeCategory(route.params.category || 'Monitores'))
 
-// Verifica se a categoria é válida, caso contrário redireciona
 if (!validCategories.includes(normalizedCategory.value)) {
   router.replace('/products/Monitores')
 }
 
-// Filtra produtos pela categoria normalizada
 const filteredProducts = ref(Produtos.products.filter(p => p.category === normalizedCategory.value))
 
-// Atualiza produtos quando a rota muda
 onBeforeRouteUpdate((to) => {
   const newCategory = normalizeCategory(to.params.category || 'Monitores')
   if (!validCategories.includes(newCategory)) {
@@ -85,9 +78,9 @@ main {
 }
 h1 {
   font-size: 24px;
-  background-color: var(--page2-hover);
+  background-color: #0276fa99;
   color: var(--textwhite);
-  box-shadow: 1px 2px 2px 1px var(--border-src);
+  box-shadow: 1px 2px 2px 1px #0455b399;
   text-align: center;
   padding: 10px;
   border-radius: 5px;
@@ -97,7 +90,7 @@ h2 {
     background-color: var(--page1);
     text-align: center;
     font-size: 26px;
-    box-shadow: 1px 2px 2px  var(--border-src);
+    box-shadow: 1px 2px 2px  #0455b399;
 }
 
 
@@ -113,7 +106,7 @@ section {
 .item {
     max-width: 300px;
     width: 400px;
-    border:  solid var(--border-src);
+    border:  solid #0455b399;
     border-radius: 5px;
     padding: 10px;
     background-color: var(--page2);
@@ -128,7 +121,7 @@ img {
 }
 
 .add-to-cart {
-  background: var(--page2-hover);
+  background: #0276fa99;
   color: white;
   border: none;
   padding: 10px;
@@ -139,6 +132,6 @@ img {
 }
 
 .add-to-cart:hover {
-  background: var(--text-hover);
+  background: #0455b399;
 }
 </style>

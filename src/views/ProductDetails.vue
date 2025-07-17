@@ -190,7 +190,7 @@ h1 {
 }
 
 .dot.active {
-  background: #333;
+  background: #0276fa99;
 }
 
 .product-info {
@@ -213,7 +213,7 @@ p {
 }
 
 .add-to-cart {
-  background: var(--text-hover);
+  background: #0276fa99;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -224,13 +224,13 @@ p {
 }
 
 .add-to-cart:hover {
-  background: var(--page2-hover);
+  background: #0455b399;
 }
 
 .back-link {
   display: inline-block;
   margin-top: 20px;
-  color: #007bff;
+  color: #0276fa99;
   text-decoration: none;
 }
 

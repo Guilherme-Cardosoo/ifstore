@@ -4,7 +4,6 @@
       <div v-if="!isFinalizing" class="container" :key="etapaAtual">
         <h1>Monte Seu PC</h1>
 
-        <!-- Indicador de Progresso -->
         <div class="progress-container">
           <h2>{{ etapaAtual + 1 }}° Escolha seu: {{ categoriaAtual }}</h2>
           <div class="progress-bar">
@@ -19,7 +18,6 @@
           </div>
         </div>
 
-        <!-- Tela de Seleção de Produtos -->
         <div v-if="etapaAtual < categorias.length" class="products-container">
           <div v-if="produtosFiltrados.length > 0" class="products-grid">
             <div
@@ -41,7 +39,6 @@
           </div>
         </div>
 
-        <!-- Tela de Revisão -->
         <div v-else class="review-container">
           <h2>Revisão da Sua Montagem</h2>
           <div v-if="temProdutosEscolhidos" class="review-card">
@@ -59,7 +56,6 @@
           </div>
         </div>
 
-        <!-- Botões de Navegação -->
         <div class="navigation">
           <button
             v-if="etapaAtual > 0"
@@ -114,7 +110,6 @@
       </div>
     </transition>
 
-    <!-- Carrinho de Compras -->
     <aside v-if="!isFinalizing" class="shopCart">
       <h2 class="tittle_cart">Carrinho</h2>
       <ul id="cart_itens">
@@ -155,7 +150,7 @@ const router = useRouter()
 
 const productStore = useProductStore()
 const cartStore = useCartStore()
-const listaProdutos = ref(productStore.products || []) // Fallback para array vazio
+const listaProdutos = ref(productStore.products || [])
 const etapaAtual = ref(0)
 const componentesEscolhidos = ref({})
 const isFinalizing = ref(false)
@@ -190,11 +185,11 @@ const precoTotal = computed(() => {
 })
 
 const precoPix = computed(() => {
-  return precoTotal.value * 0.85 // 15% de desconto
+  return precoTotal.value * 0.85 
 })
 
 const precoParcelado = computed(() => {
-  return precoTotal.value / 12 // Parcelado em 12x sem juros
+  return precoTotal.value / 12 
 })
 
 const temProdutosEscolhidos = computed(() => {
@@ -211,10 +206,8 @@ const escolherProduto = (produto) => {
     [produto.category]: produto,
   }
 
-  // Substituição inteligente no carrinho (sem duplicar itens da mesma categoria)
   cartStore.addOrReplaceByCategory(produto)
 
-  // Scroll para o botão "Próxima Etapa"
   const nextButton = document.querySelector('.next-button')
   if (nextButton) {
     nextButton.scrollIntoView({ behavior: 'smooth', block: 'center' })
@@ -249,10 +242,10 @@ const confirmarCompra = () => {
   if (temProdutosEscolhidos.value) {
     alert(`Montagem confirmada! Total: R$ ${precoTotal.value.toFixed(2)} (PIX: R$ ${precoPix.value.toFixed(2)}, 12x R$ ${precoParcelado.value.toFixed(2)})`)
 
-    componentesEscolhidos.value = {} // Limpar montagem após confirmação
+    componentesEscolhidos.value = {} 
 
     isFinalizing.value = false
-    etapaAtual.value = 0 // Voltar para a primeira etapa
+    etapaAtual.value = 0 
     router.push('/cart')
   } else {
     alert('A montagem está vazia! Selecione produtos para continuar.')
@@ -300,7 +293,7 @@ const confirmarCompra = () => {
   min-width: 0;
   max-width: 100%;
   background-color: var(--page2);
-  border: 1px solid var(--border-src);
+  border: 1px solid #0276fa99;
   border-radius: 8px;
   padding: 1rem;
   transition: background-color 0.3s, border-color 0.3s;
@@ -384,8 +377,8 @@ const confirmarCompra = () => {
 .cart_button, .finalize-button {
   width: 100%;
   padding: 8px;
-  background-color: var(--text-hover);
-  color: var(--page1);
+  background-color: #0276fa99;
+  color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -394,7 +387,7 @@ const confirmarCompra = () => {
 }
 
 .cart_button:hover, .finalize-button:hover {
-  background-color: var(--page2-hover);
+  background-color: #0455b399;
 }
 
 .finalization-buttons {
@@ -450,7 +443,7 @@ h2 {
 }
 
 .progress-item.active {
-  background-color: var(--page2-hover);
+  background-color: #0276fa99;
   color: #fff;
 }
 
@@ -466,7 +459,7 @@ h2 {
 
 .product-card {
   background-color: var(--page1);
-  border: 1px solid var(--border-src);
+  border: 1px solid #0276fa99;
   border-radius: 8px;
   padding: 0.75rem;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -500,14 +493,14 @@ h2 {
 .price {
   font-size: 1rem;
   font-weight: bold;
-  color: var(--text-hover);
+  color: #188ff099;
   margin-bottom: 0.5rem;
 }
 
 .select-button {
   width: 100%;
   padding: 8px;
-  background-color: var(--text-hover);
+  background-color: #0276fa99;
   color: var(--page1);
   border: none;
   border-radius: 4px;
@@ -516,7 +509,7 @@ h2 {
 }
 
 .select-button:hover {
-  background-color: var(--page2-hover);
+  background-color: #0455b399;
 }
 
 .no-products {
@@ -564,19 +557,19 @@ h2 {
 }
 
 .back-button {
-  background-color: var(--text-hover);
+  background-color: #0276fa99;
 }
 
 .back-button:hover {
-  background-color: var(--page2-hover);
+  background-color: #0455b399;
 }
 
 .next-button {
-  background-color: var(--page2-hover);
+  background-color: #0276fa99;
 }
 
 .next-button:hover {
-  background-color: var(--text-hover);
+  background-color: #0455b399;
 }
 
 .navigation {
@@ -584,7 +577,6 @@ h2 {
   justify-content: space-between;
 }
 
-/* Responsividade */
 @media (max-width: 1200px) {
   .wrapper {
     flex-direction: column;

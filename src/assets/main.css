@@ -3,6 +3,7 @@
 :root {
   --page1: #fff;
   --page2: #eeecec;
+  --page3: #d1d1d1;
   --page2-hover: #041d0c;
   --border-src: #ccc;
   --text: #000;
@@ -13,6 +14,7 @@
 body.dark {
   --page1: #272525;
   --page2: #363636;
+  --page3: #363636;
   --page2-hover: #497537;
   --border-src: #585858;
   --text: #fff;
