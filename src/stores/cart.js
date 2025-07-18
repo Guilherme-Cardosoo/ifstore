@@ -5,7 +5,9 @@ export const useCartStore = defineStore('cart', () => {
   const cart = ref({
     items: [],
     total: 0,
+    totalItem: 0
   })
+
 
   function addproduct(product) {
     const existingproduct = cart.value.items.find((item) => item.id === product.id)
@@ -15,6 +17,7 @@ export const useCartStore = defineStore('cart', () => {
       cart.value.items.push({ ...product, quantity: 1 })
     }
     cart.value.total += product.price
+    cart.value.totalItem += 1
     // alert(`Adicionado ${product.title} ao carrinho!`)
   }
 
@@ -22,6 +25,7 @@ export const useCartStore = defineStore('cart', () => {
     const existingproduct = cart.value.items.find((item) => item.id === product.id)
     existingproduct.quantity++
     cart.value.total += product.price
+    cart.value.totalItem += 1    
   }
 
   function decrementproductToCart(product) {
@@ -32,6 +36,7 @@ export const useCartStore = defineStore('cart', () => {
       existingproduct.quantity--
     }
     cart.value.total -= product.price
+    cart.value.totalItem -= 1    
   }
 
   function addOrReplaceByCategory(product) {
@@ -54,7 +59,7 @@ export const useCartStore = defineStore('cart', () => {
   }
 
   return {
-    cart,
+    cart,    
     addproduct,
     incrementproductToCart,
     decrementproductToCart,

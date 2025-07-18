@@ -2,9 +2,12 @@
 import { RouterLink } from 'vue-router'
 import { ref } from 'vue'
 import { useDarkMode } from '../stores/useDarkMode.js'
+import { useCartStore } from '@/stores/cart.js'
 
 const { isDarkMode, toggleDarkMode } = useDarkMode()
 const isMenuOpen = ref(false)
+const carrinho = useCartStore()
+
 
 function toggleMenu() {
   isMenuOpen.value = !isMenuOpen.value
@@ -22,23 +25,35 @@ function toggleMenu() {
         </h1>
       </div>
 
-      <div class="nav-center">
-        <div class="search-wrapper">
-          <input type="text" placeholder="Buscar produtos" />
-        </div>
+      <div class="nav-header">
+         <ul>
+
+          <li><RouterLink to="/pcbuild">Monte seu PC</RouterLink></li>
+          <li><RouterLink to="/products/processadores">Processadores</RouterLink></li>
+          <li><RouterLink to="/products/monitores">Monitores</RouterLink></li>
+          <li><RouterLink to="/products/perifericos">Periféricos</RouterLink></li>
+          <li><RouterLink to="/products/gpus">GPUs</RouterLink></li>
+          <li><RouterLink to="/products/ssds">SSDs</RouterLink></li>          
+        </ul>
       </div>
 
       <div class="nav-right">
         <ul class="icons">
           <li>
-            <RouterLink to="/cart"><span class="mdi mdi-cart"></span></RouterLink>
+            <RouterLink to="/cart">
+              <span class="mdi mdi-cart"></span>
+              <span>
+                Produtos:  
+                {{ carrinho.cart.totalItem}}
+              </span>
+            </RouterLink>
           </li>
           <li>
             <span id="darkModeButton" @click="toggleDarkMode" aria-label="Alternar modo escuro">
               <i :class="isDarkMode ? 'fa-solid fa-moon' : 'fa-solid fa-sun'"></i>
             </span>
           </li>
-          <li>
+          <li class="hamburg-menu">
             <button class="hamburger" @click="toggleMenu">
               <span class="mdi mdi-menu"></span>
             </button>
@@ -98,6 +113,11 @@ header nav {
 .nav-right {
   flex: 1;
   justify-content: flex-end;
+}
+
+.nav-header ul{
+  display: flex;
+  gap: 3rem;
 }
 
 header nav h1 {
@@ -162,6 +182,10 @@ header nav .hamburger {
   display: block;
 }
 
+.hamburg-menu {
+  display: none;
+}
+
 header nav ul.nav-links {
   position: fixed;
   top: 0;
@@ -220,6 +244,14 @@ header nav .nav-links .close-button:hover {
   .nav-right {
     width: 100%;
     justify-content: center;
+  }
+
+  .nav-header {
+    display: none;
+  }
+
+  .hamburg-menu {
+    display: block;
   }
 
   .nav-right {
